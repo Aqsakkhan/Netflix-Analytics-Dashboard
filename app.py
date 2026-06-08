@@ -21,7 +21,29 @@ content_type = st.sidebar.multiselect(
     default=df["type"].unique()
 )
 
+# Country Filter
+countries = sorted(df["country"].dropna().unique())
+
+selected_country = st.sidebar.selectbox(
+    "Select Country",
+    ["All"] + countries
+)
+
+# Rating Filter
+ratings = sorted(df["rating"].dropna().unique())
+
+selected_rating = st.sidebar.selectbox(
+    "Select Rating",
+    ["All"] + ratings
+)
+
 filtered_df = df[df["type"].isin(content_type)]
+
+if selected_country != "All":
+    filtered_df = filtered_df[filtered_df["country"] == selected_country]
+
+if selected_rating != "All":
+    filtered_df = filtered_df[filtered_df["rating"] == selected_rating]
 
 total_titles = len(filtered_df)
 movies = len(filtered_df[filtered_df["type"] == "Movie"])
