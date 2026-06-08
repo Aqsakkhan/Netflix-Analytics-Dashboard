@@ -119,5 +119,29 @@ for i, v in enumerate(genre_counts.values):
 
 st.pyplot(fig)
 
+st.subheader("📈 Netflix Content Growth Over Years")
+
+content_growth = (
+    filtered_df["release_year"]
+    .value_counts()
+    .sort_index()
+)
+
+fig, ax = plt.subplots(figsize=(10,5))
+
+ax.plot(
+    content_growth.index,
+    content_growth.values,
+    marker="o"
+)
+
+ax.set_title("Netflix Content Growth Over Time")
+ax.set_xlabel("Release Year")
+ax.set_ylabel("Number of Titles")
+
+plt.xticks(rotation=45)
+
+st.pyplot(fig)
+
 st.subheader("Dataset Preview")
 st.dataframe(filtered_df)
