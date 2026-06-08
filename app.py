@@ -9,17 +9,26 @@ st.set_page_config(
 )
 
 # Dashboard Title
-st.title("🎬 Netflix Analytics Dashboard")
-st.write("Explore Netflix content trends and insights.")
+st.title("🎬 Netflix Content Insights")
+st.caption(
+    "Interactive dashboard for exploring Netflix content trends, ratings, genres, countries, and growth patterns."
+)
 
 # Load Dataset
 df = pd.read_csv("netflix_titles.csv")
 
-# ==========================
-# SIDEBAR FILTERS
-# ==========================
-
 st.sidebar.title("Filters")
+
+st.sidebar.markdown("---")
+st.sidebar.info(
+    """
+    🎬 Netflix Content Insights
+
+    Interactive dashboard for exploring
+    Netflix content trends, ratings,
+    countries, genres, and growth.
+    """
+)
 
 # Content Type Filter
 content_type = st.sidebar.multiselect(
@@ -44,9 +53,6 @@ selected_rating = st.sidebar.selectbox(
     ["All"] + ratings
 )
 
-# ==========================
-# FILTER DATA
-# ==========================
 
 filtered_df = df[df["type"].isin(content_type)]
 
@@ -56,9 +62,6 @@ if selected_country != "All":
 if selected_rating != "All":
     filtered_df = filtered_df[filtered_df["rating"] == selected_rating]
 
-# ==========================
-# KPI CARDS
-# ==========================
 
 total_titles = len(filtered_df)
 movies = len(filtered_df[filtered_df["type"] == "Movie"])
@@ -69,11 +72,8 @@ kpi1, kpi2, kpi3 = st.columns(3)
 kpi1.metric("Total Titles", total_titles)
 kpi2.metric("Movies", movies)
 kpi3.metric("TV Shows", tv_shows)
-
-# ==========================
-# FIRST ROW
-# ==========================
-
+ 
+st.markdown("---")
 col1, col2 = st.columns(2)
 
 with col1:
@@ -117,10 +117,7 @@ with col2:
 
     st.pyplot(fig)
 
-# ==========================
-# SECOND ROW
-# ==========================
-
+st.markdown("---")
 col3, col4 = st.columns(2)
 
 with col3:
@@ -163,10 +160,7 @@ with col4:
 
     st.pyplot(fig)
 
-# ==========================
-# CONTENT GROWTH CHART
-# ==========================
-
+st.markdown("---")
 st.subheader("📈 Netflix Content Growth Over Years")
 
 content_growth = (
@@ -191,10 +185,10 @@ plt.xticks(rotation=45)
 
 st.pyplot(fig)
 
-# ==========================
-# DATASET PREVIEW
-# ==========================
+with st.expander("📋 View Dataset"):
+    st.dataframe(filtered_df)
 
-st.subheader("📋 Dataset Preview")
-
-st.dataframe(filtered_df)
+st.markdown("---")
+st.caption(
+    "Built with Python, Pandas, Matplotlib and Streamlit | Created by Aqsa Khan"
+)
