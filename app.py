@@ -143,5 +143,27 @@ plt.xticks(rotation=45)
 
 st.pyplot(fig)
 
+st.subheader("⭐ Content Ratings Distribution")
+
+rating_counts = (
+    filtered_df["rating"]
+    .dropna()
+    .value_counts()
+    .head(10)
+)
+
+fig, ax = plt.subplots(figsize=(8,5))
+
+ax.bar(rating_counts.index, rating_counts.values)
+
+ax.set_title("Top Content Ratings")
+ax.set_xlabel("Rating")
+ax.set_ylabel("Number of Titles")
+
+for i, v in enumerate(rating_counts.values):
+    ax.text(i, v + 10, str(v), ha="center")
+
+st.pyplot(fig)
+
 st.subheader("Dataset Preview")
 st.dataframe(filtered_df)
