@@ -55,6 +55,7 @@ col1.metric("Total Titles", total_titles)
 col2.metric("Movies", movies)
 col3.metric("TV Shows", tv_shows)
 
+
 st.subheader("Movies vs TV Shows")
 
 type_counts = filtered_df["type"].value_counts()
@@ -71,5 +72,28 @@ for i, v in enumerate(type_counts.values):
     ax.text(i, v + 50, str(v), ha="center")
 
 st.pyplot(fig)
+
+st.subheader("🌍 Top Countries Producing Netflix Content")
+
+country_counts = (
+    filtered_df["country"]
+    .dropna()
+    .value_counts()
+    .head(10)
+)
+
+fig, ax = plt.subplots(figsize=(8,5))
+
+ax.barh(country_counts.index, country_counts.values)
+
+ax.set_title("Top 10 Countries")
+ax.set_xlabel("Number of Titles")
+ax.set_ylabel("Country")
+
+for i, v in enumerate(country_counts.values):
+    ax.text(v + 5, i, str(v), va="center")
+
+st.pyplot(fig)
+
 st.subheader("Dataset Preview")
 st.dataframe(filtered_df)
