@@ -95,5 +95,29 @@ for i, v in enumerate(country_counts.values):
 
 st.pyplot(fig)
 
+st.subheader("🎭 Most Popular Genres")
+
+genres = (
+    filtered_df["listed_in"]
+    .dropna()
+    .str.split(", ")
+    .explode()
+)
+
+genre_counts = genres.value_counts().head(10)
+
+fig, ax = plt.subplots(figsize=(8,5))
+
+ax.barh(genre_counts.index, genre_counts.values)
+
+ax.set_title("Top 10 Genres")
+ax.set_xlabel("Number of Titles")
+ax.set_ylabel("Genre")
+
+for i, v in enumerate(genre_counts.values):
+    ax.text(v + 5, i, str(v), va="center")
+
+st.pyplot(fig)
+
 st.subheader("Dataset Preview")
 st.dataframe(filtered_df)
