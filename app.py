@@ -108,6 +108,21 @@ st.markdown(
             margin-bottom: 0;
         }
 
+        div[data-testid="stTextInput"] input {
+            min-height: 3.25rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(17,24,39,0.86);
+            color: #FFFFFF;
+            font-size: 1rem;
+            box-shadow: 0 14px 36px rgba(0,0,0,0.22);
+        }
+
+        div[data-testid="stTextInput"] input:focus {
+            border-color: rgba(229,9,20,0.75);
+            box-shadow: 0 0 0 1px rgba(229,9,20,0.35), 0 18px 42px rgba(229,9,20,0.10);
+        }
+
         .kpi-card {
             min-height: 126px;
             padding: 1.15rem;
@@ -297,11 +312,6 @@ with st.sidebar:
         value=(min_year, max_year),
         help="Filter content by original release year.",
     )
-    title_search = st.text_input(
-        "Search by Title",
-        placeholder="Type a title keyword...",
-        help="Case-insensitive keyword search across Netflix titles.",
-    )
     selected_countries = st.multiselect(
         "Countries",
         options=all_countries,
@@ -320,6 +330,24 @@ with st.sidebar:
         default=[],
         help="Leave empty to include all genres. Titles are matched when they include any selected genre.",
     )
+# -----------------------------------------------------------------------------
+# Dashboard header
+# -----------------------------------------------------------------------------
+st.markdown(
+    f"""
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">Netflix Content Insights Dashboard</h1>
+        <p class="dashboard-subtitle">Explore content mix, ratings, countries, genres, and release trends.</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+title_search = st.text_input(
+    "Search by Title",
+    placeholder="🔍 Search Netflix titles...",
+    label_visibility="collapsed",
+    help="Search by title. Results update every KPI and chart.",
+)
 # -----------------------------------------------------------------------------
 # Filtering logic
 # -----------------------------------------------------------------------------
@@ -369,18 +397,6 @@ with st.sidebar:
         use_container_width=True,
         disabled=filtered_df.empty,
     )
-# -----------------------------------------------------------------------------
-# Dashboard header
-# -----------------------------------------------------------------------------
-st.markdown(
-    f"""
-    <div class="dashboard-header">
-        <h1 class="dashboard-title">Netflix Content Insights Dashboard</h1>
-        <p class="dashboard-subtitle">Explore content mix, ratings, countries, genres, and release trends.</p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 # -----------------------------------------------------------------------------
 # KPI cards
 # -----------------------------------------------------------------------------
