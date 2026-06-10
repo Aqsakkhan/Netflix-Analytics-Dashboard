@@ -289,7 +289,6 @@ with st.sidebar:
         options=all_types,
         default=all_types,
         help="Choose Movies, TV Shows, or both.",
-    )
     selected_year_range = st.slider(
         "Release Year Range",
         min_value=min_year,
@@ -319,7 +318,6 @@ with st.sidebar:
         options=all_genres,
         default=[],
         help="Leave empty to include all genres. Titles are matched when they include any selected genre.",
-    )
 # -----------------------------------------------------------------------------
 # Filtering logic
 # -----------------------------------------------------------------------------
@@ -426,7 +424,6 @@ else:
         </div>
         """,
         unsafe_allow_html=True,
-    )
 # -----------------------------------------------------------------------------
 # Interactive visualizations
 # -----------------------------------------------------------------------------
@@ -571,8 +568,7 @@ with st.expander("📋 Dataset Preview", expanded=False):
 st.markdown(
     """
     <div class="footer">
-        Built with Streamlit, Pandas, and Plotly.
+        Built with Streamlit, Pandas, and Plotly · Created by Aqsa Khan
     </div>
     """,
     unsafe_allow_html=True,
-)
