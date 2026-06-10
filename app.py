@@ -292,9 +292,11 @@ with st.sidebar:
     with st.expander("About", expanded=False):
         st.markdown(
             f"""
-            Netflix catalog analytics.<br>
-            `{len(df):,}` titles.<br>
-            Filter, compare, and export results.
+            Netflix catalog analytics
+
+              • 8,807 titles
+              • Interactive filters
+              • Export filtered data
             """
         )
     st.markdown("---")
@@ -434,7 +436,7 @@ else:
         f"""
         <div class="insight-box">
             <ul>
-                <li><strong>{top_type}</strong> makes up the largest share of results.</li>
+                <li><strong>{top_type}</strong> dominate the Netflix catalog</li>
                 <li><strong>{top_rating}</strong> is the most common rating.</li>
                 <li><strong>{top_genre}</strong> is the top genre.</li>
                 <li><strong>{top_country}</strong> is the top country, with peak releases in <strong>{peak_year}</strong>.</li>
