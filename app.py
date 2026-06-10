@@ -290,15 +290,11 @@ max_year = int(df["release_year"].max())
 with st.sidebar:
     st.markdown("# 🎬 Netflix Insights")
     with st.expander("About", expanded=False):
-        st.markdown(
-            f"""
-            Netflix catalog analytics
-
-              • 8,807 titles
-              • Interactive filters
-              • Export filtered data
-            """
-        )
+       st.markdown("""
+        Explore Netflix content trends,
+        genres, ratings, and countries
+        through interactive analytics.
+""")
     st.markdown("---")
     st.markdown("### Filters")
     selected_types = st.multiselect(
